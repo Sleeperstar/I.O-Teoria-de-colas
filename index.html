@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teoría de Colas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header id="hdr" class="site-header inicio">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+                <a class="titulo" href="index.html">
+                    <h1>Aplicacion de la Teoria de Colas</h1>
+                </a>
+                <nav class=navegacion>
+                    <a href="#hdr">Inicio</a>
+                    <a href="#s2">App</a>
+                </nav>
+            </div>
+            <div>
+                <h1>Investigacion Operativa</h1>
+                
+            </div>
+        </div>
+    </header> 
+    <br>
+
+    <section id="s2" class="secion contenedor wt">
+        <h2 class="fw-300 centrar-texto">MODELO DE COLAS<br>M/M/S</h2>
+        <div class="detalles">
+            <p>Sea:</p>
+        </div>
+        <div class="detalles">
+            <p class=" fw-300">&lambda;= Tasa promedio de llegadas en la unidad de tiempo</p>
+            <p class=" fw-300">\(\frac{1}{\lambda} \)= Tiempo entre llegadas de los clientes</p>
+            <p class=" fw-300">&mu;= Tasa promedio de servicio</p>
+            <p class=" fw-300">\(\frac{1}{\mu} \)= Tiempo de servicio</p>
+            <p class=" fw-300">&rho;= Tiempo esperado que el servidor este ocupado</p>
+            <p class=" fw-300">Ws = Tiempo estimado de espera en el sitema. \(W_s=W_q+\frac{1}{\mu}\)</p>
+            <p class=" fw-300">Wq = Tiempo estimado de espera en la fila. \(W_q=\frac{L_q}{\lambda}\)</p>
+            <p class=" fw-300">Ls = Numero estimado de clientes en el sitema. \(L_s=L_q+\rho\)</p>
+            <p class=" fw-300">Lq = Numero de clientes en la fila. \(L_q=\frac{\rho^{S+1}}{\left(S-1 \right)!\left(S-p \right)^2}P_o\)</p>
+            <p class=" fw-300">\(P_0\) =Posibilidad de que el sistema este desocupado. \(P_0=\frac{1}{\sum_{n=0}^{n=S-1}\frac{\rho^{n}}{n!}+\frac{\rho^{s}}{S!}\left (\frac{1}{1-\rho/s} \right ) }\)</p>
+        </div>
+
+
+</html>
+
+        </div>
+
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Entrada de datos en una unidad de tiempo (horas)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="first-column">&lambda;</td>
+                            <td>
+                                <input id="lambda" style="text-align:center">
+                            </td>
+                            <td class="first-column">&mu;</td>
+                            <td>
+                                <input id="mu" style="text-align:center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="first-column">S</td>
+                            <td>
+                                <input id="s" style="text-align:center">
+                            </td>
+                            <td class="first-column">&rho;</td>
+                            <td>
+                                <p id="rho"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div class="">
+                    <div class="m-3">
+                        <a class="boton boton-analizar" id="buttonAnalizar" onclick="QueueingApp();">Ejecutar</a>
+                    </div>
+                    <br>
+                    <div class="m-3">
+                        <a class="boton boton-analizar" onclick="clearAll();">Limpiar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Entrada de datos obtenida en la BD - Scotiabank (Minutos)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="first-column">1/&lambda;</td>
+                            <td>
+                                <p id="invLambda"></p>
+                            </td>
+                            <td class="first-column">1/&mu;</td>
+                            <td>
+                                <p id="invMu"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Salida de resultados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="first-column">P<sub>0</sub></td>
+                            <td>
+                                <p id="p0"></p>
+                            </td>
+                            <td class="first-column">L<sub>s</sub></td>
+                            <td>
+                                <p id="ls"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="first-column">L<sub>q</sub></td>
+                            <td>
+                                <p id="lq"></p>
+                            </td>
+                            <td class="first-column">W<sub>s</sub></td>
+                            <td>
+                                <p id="ws"></p>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td class="first-column">W<sub>q</sub></td>
+                            <td>
+                                <p id="wq"></p>
+                            </td>
+                            <td class="first-column">Wmin</td>
+                            <td>
+                                <p id="wMin"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <tbody>
+                        <tr class="tableizer-firstrow" id="tableHeader">
+                            <td class="first-column">Sumatoria</td>
+                        </tr>
+                        <tr id="firstRow">
+                            <td class="first-column">
+                                <p id="sumatoria"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="first-column">\(\frac{S^P}{S!}\)</td>
+                            <td>
+                                <p id="sps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="first-column">\(\frac{1}{1-\frac{P}{S}}\)</td>
+                            <td>
+                                <p id="ps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="first-column">P<sub>0</sub> </td>
+                            <td>
+                                <p id="p0t"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Reporte</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="">Tasa promedio de llegada en la unidad de tiempo</td>
+                            <td>
+                                <p id="lambdaIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tiempo entre llegada de clientes</td>
+                            <td>
+                                <p id="invLambdaIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tasa promedio de servicio</td>
+                            <td>
+                                <p id="muIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tiempo de servicio</td>
+                            <td>
+                                <p id="invMuIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Número de servidores</td>
+                            <td>
+                                <p id="sIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tiempo esperado a que el servidor esta ocupado</td>
+                            <td>
+                                <p id="rhoIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Posibilidad de que el sistema este desocupado</td>
+                            <td>
+                                <p id="p0In"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Número de usuarios en la cola de espera</td>
+                            <td>
+                                <p id="lqIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Número de usuarios esperados en el sistema</td>
+                            <td>
+                                <p id="lsIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tiempo estimado de espera en la cola</td>
+                            <td>
+                                <p id="wqIn"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">Tiempo esperado de espera en el sistema</td>
+                            <td>
+                                <p id="wsIn"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Gracias por su atencion!</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                    
+                </table>
+            <div class="contenedor2">
+                <img src="img/final.gif" alt="Imagen final"> 
+            </div>      
+                
+            </div>    
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="partFooter">
+            <div class="f-footer" >
+                <a class="titulo-footer" href="index.html" >
+                    <h2>Aplicacion de la <br>Teoria de Colas</h2>
+                </a>
+            </div>
+        </div>
+        <div class="partFooter">
+            <h4>UNMSM</h4>
+            <p>Facultad de Ingenieria de Sistemas e Informatica</p>
+            <p>E.A.P. Ingenieria de Sistemas</p>
+            <p>Investigacion Operativa</p>
+            <p>Docente: Mg.Maria Elizabeth Puelles Bulnes</p>
+
+
+        </div>
+        <div class="partFooter">
+            <h4>Integrantes</h4>
+            <p>•Quispe Huallpa Jhampier<br>-18200177</p>
+            <p>•Alex Antony Zedano Romani<br>-18200210</p>
+            <p>•Vilchez Giraldo Jamie Edinso<br>-19200171</p>
+
+        </div>
+
+
+
+
+
+    </footer>
+    <script type="text/javascript" src="js/QueueingApp.js"></script>
+</body>
+
+</html>
